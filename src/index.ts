@@ -5,6 +5,7 @@ import http from "http";
 Load environment variables
 */
 import dotenv from "dotenv";
+import Database from "./database";
 dotenv.config();
 
 /**
@@ -21,12 +22,16 @@ app.set("port", port);
 const server = http.createServer(app);
 
 /**
+ * Connect to MongoDB server
+ */
+
+Database.initMongo()
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
 /* tslint:disable */
 server.listen(port, () => {
-  console.log("--------------------------------------");
-  console.log(`Server is listening on port ${port}`);
-  console.log("--------------------------------------");
+  console.log(`----- Server  Running at  : ${port}`);
 });

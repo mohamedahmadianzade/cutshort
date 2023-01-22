@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import authenticationRouter from "./authentication/authentication.route";
 const rateLimit = require("express-rate-limit");
 import UserRouter from "./user/user.route";
 
@@ -16,7 +17,7 @@ app.use(morgan("common"));
 // rate limmit
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 2, // limit each IP to 20000 requests per windowMs
+  max: 20, // limit each IP to 20000 requests per windowMs
   message: "Too many request from this IP, please try again after a 1 minute",
 });
 app.use(limiter);
@@ -29,6 +30,7 @@ app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/users", UserRouter);
+app.use("/", authenticationRouter);
 
 
 
