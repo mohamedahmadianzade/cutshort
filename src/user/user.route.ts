@@ -1,6 +1,5 @@
 import Router, { Response, Request } from "express";
 import Authentication from "../authentication/authentication";
-import AuthenticationMiddleware from "../authentication/authentication.middleware";
 import { success, fail } from "../general";
 import UserLogic from "./user.logic";
 
@@ -9,10 +8,9 @@ const userLogic = new UserLogic();
 
 userRouter.get(
   "/",
-  AuthenticationMiddleware,
   async (req: Request, res: Response) => {
     try {
-      let users = await userLogic.getAllUsers(req.query);
+      const users = await userLogic.getAllUsers(req.query);
       res.json(success(users));
     } catch (error) {
       res.send(fail(error));
@@ -22,7 +20,7 @@ userRouter.get(
 
 userRouter.get("/:userId", async (req: Request, res: Response) => {
   try {
-    let users = await userLogic.getByUserId(req.params.userId);
+    const users = await userLogic.getByUserId(req.params.userId);
     res.json(success(users));
   } catch (error) {
     res.send(fail(error));
@@ -31,7 +29,7 @@ userRouter.get("/:userId", async (req: Request, res: Response) => {
 
 userRouter.post("/", async (req: Request, res: Response) => {
   try {
-    let users = await userLogic.createUser(req.body);
+    const users = await userLogic.createUser(req.body);
     res.json(success(users));
   } catch (error) {
     res.send(fail(error));
@@ -40,7 +38,25 @@ userRouter.post("/", async (req: Request, res: Response) => {
 
 userRouter.post("/login", async (req: Request, res: Response) => {
   try {
-    let users = await new Authentication().login(req.body);
+    const users = await new Authentication().login(req.body);
+    res.json(success(users));
+  } catch (error) {
+    res.send(fail(error));
+  }
+});
+
+userRouter.get("/:userId/posts", async (req: Request, res: Response) => {
+  try {
+    const users = await userLogic.getUserPost(req.params.userId);
+    res.json(success(users));
+  } catch (error) {
+    res.send(fail(error));
+  }
+});
+
+userRouter.get("/:userId/todos", async (req: Request, res: Response) => {
+  try {
+    const users = await userLogic.getUserTodos(req.params.userId);
     res.json(success(users));
   } catch (error) {
     res.send(fail(error));

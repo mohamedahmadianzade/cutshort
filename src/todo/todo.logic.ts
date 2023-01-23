@@ -1,21 +1,23 @@
 import UserRepository from "../user/user.repository";
-import ITodo, {
-  IGetAllTodoInput,
-  ITodoCreate,
-  ITodoUpdate,
-} from "./todo.interface";
+import ITodo, { ITodoFilter, ITodoCreate, ITodoUpdate } from "./todo.interface";
 import TodoRepository from "./todo.repository";
 import { ObjectId } from "mongodb";
 
 const todoRepository = new TodoRepository();
 export default class TodoLogic {
-  async getAll(filter: IGetAllTodoInput) {
+  async getAll(filter: ITodoFilter) {
     return todoRepository.getAll(filter);
   }
   async getById(id: string) {
     const _id = this._checkId(id);
-    return todoRepository.get({ _id });
+    const result = await todoRepository.get({ _id });
+    if (!result) throw new Error("Id does not exist");
+    return result;
   }
+  async get(filter: ITodoFilter) {
+    return todoRepository.get(filter);
+  }
+
   async delete(id: string) {
     const _id = this._checkId(id);
     const result = await todoRepository.delete(_id);

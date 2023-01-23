@@ -1,8 +1,9 @@
 import UserLogic from "../user/user.logic";
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
+import { JWT_SECRET_KEY } from "../env";
+
 const userLogic = new UserLogic();
 export default class Authentication {
-
   async login({
     username,
     password,
@@ -21,12 +22,14 @@ export default class Authentication {
   }
 
   static generateToken(userId: string): string {
-    return jwt.sign({ userId }, process.env.JWT_SECRET_KEY, { expiresIn: "1800s" });
+    return jwt.sign({ userId }, JWT_SECRET_KEY, {
+      expiresIn: "1800s",
+    });
   }
 
-  static verifyToken(token: string): boolean {
+  static verifyToken(token: string): any {
     try {
-      return jwt.verify(token, process.env.JWT_SECRET_KEY);
+      return jwt.verify(token, JWT_SECRET_KEY);
     } catch (err) {
       throw new Error("Token is invalid");
     }

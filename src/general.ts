@@ -1,3 +1,5 @@
+import { QUERY_PAGESIZE } from "./env";
+
 interface BaseInterface {
   success: boolean;
   message?: string;
@@ -21,23 +23,21 @@ export function fail(error: any): BaseInterface {
   };
 }
 
-//=============== Hash ====================
-//todo
+// =============== Hash ====================
+// todo
 export function hash(password: string): string {
   return password;
 }
-//=============== Hash ====================
+// =============== Hash ====================
 
-//=============== Pagination ====================
+// =============== Pagination ====================
 export function pagination(
   page: number = 1,
   pageSize: number | undefined
 ): PaginationInterface {
   pageSize = pageSize
     ? pageSize
-    : process.env.QUERY_PAGESIZE
-    ? parseInt(process.env.QUERY_PAGESIZE)
-    : 10;
+    : QUERY_PAGESIZE;
   return {
     skip: (page - 1) * pageSize,
     limit: pageSize,
@@ -54,4 +54,4 @@ export interface IPaginations {
   pageSize?: number;
 }
 
-//=============== Pagination ====================
+// =============== Pagination ====================

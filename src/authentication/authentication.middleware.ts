@@ -7,7 +7,7 @@ export default function AuthenticationMiddleware(
   next: NextFunction
 ) {
   try {
-    const authKey = req.headers["authorization"];
+    const authKey = req.headers.authorization;
     if (!authKey) throw new Error("Please provide token in header");
     const token = authKey.split(" ")[1];
     const userId = Authentication.verifyToken(token);

@@ -1,8 +1,11 @@
-import { connect } from "mongoose";
+import mongoose , { connect } from "mongoose";
+import { MONGODB_HOST, MONGODB_PORT, MONGODB_DATABASE } from "./env";
+mongoose.set("strictQuery", false);
 export default class Database {
   static async initMongo(): Promise<void> {
-    const connection = `${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE}`;
+    const connection = `${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}`;
     await connect(`mongodb://${connection}`);
-    console.log(`----- MongoDB Running at  : ${connection}`);
+    /* tslint:disable */
+    console.log(`----- MongoDB Running at  : ${connection} ---------`);
   }
 }

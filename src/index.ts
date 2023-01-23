@@ -6,13 +6,14 @@ Load environment variables
 */
 import dotenv from "dotenv";
 import Database from "./database";
+import { PORT } from "./env";
 dotenv.config();
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port: string = process.env.PORT || "3000";
+const port: string = PORT || "3000";
 app.set("port", port);
 
 /**
@@ -33,5 +34,5 @@ Database.initMongo()
 
 /* tslint:disable */
 server.listen(port, () => {
-  console.log(`----- Server  Running at  : ${port}`);
+  console.log(`----- Server  Running at  : ${port} ---------`);
 });

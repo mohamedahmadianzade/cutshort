@@ -9,10 +9,12 @@ export default interface ITodo {
   createDate: Date;
 }
 
-export interface IGetAllTodoInput extends IPaginations {
+export interface ITodoFilter extends IPaginations {
+  _id?: string;
   title?: string;
   completed?: boolean;
   userId?: string;
+  description?: string;
 }
 
 export interface ITodoCreate {

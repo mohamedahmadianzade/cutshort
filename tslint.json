@@ -4,7 +4,7 @@
   "jsRules": {},
   "rules": {
     "trailing-comma": [false],
-    "only-arrow-functions": [false],
+    "only-arrow-functions": [false]
   },
   "rulesDirectory": []
 }
