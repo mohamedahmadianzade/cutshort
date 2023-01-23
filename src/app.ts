@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import authenticationRouter from "./authentication/authentication.route";
+import todoRouter from "./todo/todo.route";
 const rateLimit = require("express-rate-limit");
 import UserRouter from "./user/user.route";
 
@@ -30,6 +31,7 @@ app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/users", UserRouter);
+app.use("/todos", todoRouter);
 app.use("/", authenticationRouter);
 
 

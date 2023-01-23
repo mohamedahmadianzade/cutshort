@@ -1,3 +1,5 @@
+import { IPaginations } from "../general";
+
 export default interface IUser {
   userId: string;
   fullname: string;
@@ -25,7 +27,4 @@ export interface IUserInput {
   password: string;
 }
 
-export interface IPaginations {
-  page?: number;
-  pageSize?: number;
-}
+

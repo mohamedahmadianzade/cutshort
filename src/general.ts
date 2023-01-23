@@ -49,4 +49,9 @@ interface PaginationInterface {
   limit: number;
 }
 
+export interface IPaginations {
+  page?: number;
+  pageSize?: number;
+}
+
 //=============== Pagination ====================
