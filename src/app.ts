@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import authenticationRouter from "./authentication/authentication.route";
 import todoRouter from "./todo/todo.route";
-import rateLimit from 'express-rate-limit'
+import rateLimit from "express-rate-limit";
 import UserRouter from "./user/user.route";
 import postRouter from "./post/post.route";
 import commentRouter from "./comment/comment.route";
@@ -33,13 +33,11 @@ app.use(limiter);
 */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/users", UserRouter);
+app.use("/users",  UserRouter);
 app.use("/userRoles", UserRoleRouter);
 app.use("/todos", todoRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/", authenticationRouter);
-
-
 
 export default app;

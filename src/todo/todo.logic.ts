@@ -34,7 +34,11 @@ export default class TodoLogic {
     if (!todo.description) throw new Error("Please enter a description");
     if (!todo.userId) throw new Error("Please enter a userId");
 
-    const userInfo = await new UserRepository().getByUserId(todo.userId);
+    const userInfo = await new UserRepository().getByUserId(
+      todo.userId,
+      undefined,
+      true
+    );
     if (!userInfo) throw new Error("UserId is not valid");
 
     const { title, description } = todo;

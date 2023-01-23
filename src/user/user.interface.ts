@@ -13,6 +13,7 @@ export interface IGetAllUsersInput extends IPaginations {
   username?: string;
   enabled?: boolean;
   fullname?: string;
+  userId?: string;
 }
 
 export interface IUserOutput {

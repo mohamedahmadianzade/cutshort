@@ -1,5 +1,5 @@
 import mongoose , { connect } from "mongoose";
-import { MONGODB_HOST, MONGODB_PORT, MONGODB_DATABASE } from "./env";
+import { MONGODB_HOST, MONGODB_PORT, MONGODB_DATABASE } from "./config";
 mongoose.set("strictQuery", false);
 export default class Database {
   static async initMongo(): Promise<void> {

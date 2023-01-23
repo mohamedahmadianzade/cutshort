@@ -1,3 +1,4 @@
+import { IRequestUser } from "../authentication/authentication.middleware";
 import IPost from "../post/post.interface";
 import PostLogic from "../post/post.logic";
 import ITodo from "../todo/todo.interface";
@@ -7,16 +8,23 @@ import UserRepository from "./user.repository";
 const userRepository = new UserRepository();
 
 export default class UserLogic {
-  getAllUsers = (filter: IGetAllUsersInput): Promise<IUserOutput[]> => {
-    return userRepository.getAllUsers(filter);
+  getAllUsers = (
+    filter: IGetAllUsersInput,
+    requestUser: IRequestUser
+  ): Promise<IUserOutput[]> => {
+    return userRepository.getAllUsers(filter, requestUser);
   };
-  getByUserId = (userId: string) => {
+  getByUserId = (userId: string, requestUser: IRequestUser) => {
     this._checkUserId(userId);
-    return userRepository.getByUserId(userId);
+    return userRepository.getByUserId(userId, requestUser);
   };
   createUser = async (user: IUserInput): Promise<IUserOutput> => {
     this._checkCreateUser(user);
-    const result = await userRepository.getByUserId(user.username);
+    const result = await userRepository.getByUserId(
+      user.username,
+      undefined,
+      true
+    );
     if (result)
       throw new Error(
         `Username ${user.username} is exists, please choose different username`

@@ -7,8 +7,9 @@
     "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true ,
-    "noUnusedParameters": true  ,
-    "noUnusedLocals": true,
-  }
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true
+  },
+  "include": ["custome.d.ts"]
 }

@@ -14,7 +14,7 @@ export default class CommentLogic {
     return commentRepository.getAll(filter);
   }
   async getById(id: string) {
-    const _id = this._checkId(id,"CommentId");
+    const _id = this._checkId(id, "CommentId");
     const result = await commentRepository.get({ _id });
     if (!result) throw new Error("Id does not exist");
     return result;
@@ -24,13 +24,13 @@ export default class CommentLogic {
   }
 
   async delete(id: string) {
-    const _id = this._checkId(id,"CommentId");
+    const _id = this._checkId(id, "CommentId");
     const result = await commentRepository.delete(_id);
     if (!result) throw new Error("This record does not exist");
     return "Record deleted successfully";
   }
   async update(id: string, comment: ICommentUpdate): Promise<IComment> {
-    const _id = this._checkId(id,"CommentId");
+    const _id = this._checkId(id, "CommentId");
     return commentRepository.update(_id, comment);
   }
 
@@ -39,7 +39,11 @@ export default class CommentLogic {
     if (!comment.userId) throw new Error("Please enter a userId");
     if (!comment.postId) throw new Error("Please enter a postId");
 
-    const userInfo = await new UserRepository().getByUserId(comment.userId);
+    const userInfo = await new UserRepository().getByUserId(
+      comment.userId,
+      undefined,
+      true
+    );
     if (!userInfo) throw new Error("Related user not found");
 
     this._checkId(comment.postId, "PostId");

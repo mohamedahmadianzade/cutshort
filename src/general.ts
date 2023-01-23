@@ -1,4 +1,4 @@
-import { QUERY_PAGESIZE } from "./env";
+import { QUERY_PAGESIZE } from "./config";
 
 interface BaseInterface {
   success: boolean;

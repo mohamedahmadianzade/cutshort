@@ -1,5 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
 export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";
-
 export const PORT = process.env.PORT || "3000";
 
 export const MONGODB_HOST = process.env.MONGODB_HOST || "127.0.0.1";
