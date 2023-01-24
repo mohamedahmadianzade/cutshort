@@ -39,11 +39,7 @@ export default class CommentLogic {
     if (!comment.userId) throw new Error("Please enter a userId");
     if (!comment.postId) throw new Error("Please enter a postId");
 
-    const userInfo = await new UserRepository().getByUserId(
-      comment.userId,
-      undefined,
-      true
-    );
+    const userInfo = await new UserRepository().getByUserId(comment.userId);
     if (!userInfo) throw new Error("Related user not found");
 
     this._checkId(comment.postId, "PostId");

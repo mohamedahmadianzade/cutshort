@@ -7,6 +7,7 @@ import UserRouter from "./user/user.route";
 import postRouter from "./post/post.route";
 import commentRouter from "./comment/comment.route";
 import UserRoleRouter from "./userRole/userRole.route";
+import AuthenticationMiddleware from "./authentication/authentication.middleware";
 
 const app = express();
 
@@ -33,9 +34,9 @@ app.use(limiter);
 */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/users",  UserRouter);
+app.use("/users", UserRouter);
 app.use("/userRoles", UserRoleRouter);
-app.use("/todos", todoRouter);
+app.use("/todos", AuthenticationMiddleware, todoRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/", authenticationRouter);

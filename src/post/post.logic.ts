@@ -41,7 +41,7 @@ export default class PostLogic {
     if (!post.text) throw new Error("Please enter a text");
     if (!post.userId) throw new Error("Please enter a userId");
 
-    const userInfo = await new UserRepository().getByUserId(post.userId, undefined, true);
+    const userInfo = await new UserRepository().getByUserId(post.userId);
     if (!userInfo) throw new Error("UserId is not valid");
 
     const { text, userId } = post;

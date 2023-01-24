@@ -47,3 +47,8 @@ interface LoginResult {
   userId: string;
   token: string;
 }
+
+
+export const accessDenied = () => {
+  throw new Error("Access denied, you can just access/modify your information");
+};

@@ -1,79 +1,31 @@
-import Router, { Response } from "express";
-import Authentication from "../authentication/authentication";
-import { success, fail } from "../general";
-import UserLogic from "./user.logic";
+import Router from "express";
 import AuthenticationMiddleware from "../authentication/authentication.middleware";
+import UserController from "./user.controller";
+
 const userRouter = Router();
-const userLogic = new UserLogic();
+const userController = new UserController();
 
-userRouter.get(
-  "/",
-  AuthenticationMiddleware,
-  async (req: any, res: Response) => {
-    try {
-      const users = await userLogic.getAllUsers(req.query, req.user);
-      res.json(success(users));
-    } catch (error) {
-      res.send(fail(error));
-    }
-  }
-);
+// if admin has access to all user else just his information
+userRouter.get("/", AuthenticationMiddleware, userController.getAll);
 
-userRouter.get(
-  "/:userId",
-  AuthenticationMiddleware,
-  async (req: any, res: Response) => {
-    try {
-      const users = await userLogic.getByUserId(req.params.userId, req.user);
-      res.json(success(users));
-    } catch (error) {
-      res.send(fail(error));
-    }
-  }
-);
+// if admin has access to all user else just his information
+userRouter.get("/:userId", AuthenticationMiddleware, userController.get);
 
-userRouter.post("/", async (req: any, res: Response) => {
-  try {
-    const users = await userLogic.createUser(req.body);
-    res.json(success(users));
-  } catch (error) {
-    res.send(fail(error));
-  }
-});
+// just admin user canc create new user
+userRouter.post("/",AuthenticationMiddleware, userController.create);
 
-userRouter.post("/login", async (req: any, res: Response) => {
-  try {
-    const users = await new Authentication().login(req.body);
-    res.json(success(users));
-  } catch (error) {
-    res.send(fail(error));
-  }
-});
-
+// if admin, has access to all user post else just his post
 userRouter.get(
   "/:userId/posts",
   AuthenticationMiddleware,
-  async (req: any, res: Response) => {
-    try {
-      const users = await userLogic.getUserPost(req.params.userId);
-      res.json(success(users));
-    } catch (error) {
-      res.send(fail(error));
-    }
-  }
+  userController.userPosts
 );
 
+// if admin, has access to all user todos else just his todos
 userRouter.get(
   "/:userId/todos",
   AuthenticationMiddleware,
-  async (req: any, res: Response) => {
-    try {
-      const users = await userLogic.getUserTodos(req.params.userId);
-      res.json(success(users));
-    } catch (error) {
-      res.send(fail(error));
-    }
-  }
+  userController.userTodos
 );
 
 export default userRouter;

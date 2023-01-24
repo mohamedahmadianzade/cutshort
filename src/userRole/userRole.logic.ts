@@ -24,11 +24,7 @@ export default class UserRoleLogic {
     if (!Object.keys(Roles).includes(userRole.roleId))
       throw new Error("RoleId is invalud");
 
-    const userInfo = await new UserRepository().getByUserId(
-      userRole.userId,
-      undefined,
-      true
-    );
+    const userInfo = await new UserRepository().getByUserId(userRole.userId);
     if (!userInfo) throw new Error("UserId is not valid");
 
     const userRoleExist = await userRoleRepository.getAll(userRole);
