@@ -99,10 +99,19 @@ npx ts-node .\src\init.ts
 ```
 
 It will create 2 users with 2 different roles : {admin , user}
+
 admin user ==> username: admin password : admin
+
 normal user ==> username: user password : user
 
 admin user has access completely to all api service and data but normal user just can access the api service and data that is related to him.
+
+By runnign this file, for each user, it will create
+- 2 post with
+
+- 2 comment
+
+- 2 todos
 
 <!-- Installation -->
 
