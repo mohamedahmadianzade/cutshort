@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "ac5d3e73-d80c-4edd-8917-257e8572a487",
+		"name": "cutshort",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "enabled",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "fullname",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserPosts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/12/posts",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"12",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserTodos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/3/todos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "signIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"user\" ,\r\n    \"password\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/signIn",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"user\",\r\n    \"fullname\": \"default user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/signUp",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/me",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "todo",
+			"item": [
+				{
+					"name": "getAllTodos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/todos/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"todos",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "completed",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTodo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmNTFhNjgyMi1iNGRhLTRiZGUtYjc1ZC03MGRkZGM1OTY4MTkiLCJpYXQiOjE2NzQ1NDc2NjQsImV4cCI6MTY3NDU0OTQ2NH0.a3-tX8awHtEuFcM4QDcz3rnBKqNmrq_lI3cb1G6P6oo",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"normal user todo\" ,\r\n    \"description\":\"normal user todo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/todos/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"todos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTodoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/todos/63cd9f57a39e890bc13308a6",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"todos",
+								"63cd9f57a39e890bc13308a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTodo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/todos/63cda9c8964e86b27626fc51",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"todos",
+								"63cda9c8964e86b27626fc51"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTodo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"updated value\",\r\n    \"description\":\"updated value\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/todos/63d00837977e016eb30ad2e1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"todos",
+								"63d00837977e016eb30ad2e1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "getAllPosts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/posts",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/posts/63ce4fe8ea46d41541c1b688",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts",
+								"63ce4fe8ea46d41541c1b688"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePost",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/posts/63ce4fe3ea46d41541c1b684",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts",
+								"63ce4fe3ea46d41541c1b684"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreatePost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"2\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/posts/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePost",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"new text\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/posts/63ce4fe8ea46d41541c1b688",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts",
+								"63ce4fe8ea46d41541c1b688"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPostComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/posts/63ce4fe8ea46d41541c1b688/comments",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"posts",
+								"63ce4fe8ea46d41541c1b688",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "getCommentById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comments/63ce4fe8ea46d41541c1b688",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"63ce4fe8ea46d41541c1b688"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comments",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "postId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteComment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comments/63ce4fe3ea46d41541c1b684",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"63ce4fe3ea46d41541c1b684"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"2\" ,\r\n    \"userId\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePost",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"new text\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comments/63ce4fe8ea46d41541c1b688",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comments",
+								"63ce4fe8ea46d41541c1b688"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userRole",
+			"item": [
+				{
+					"name": "createUserRole",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmNTFhNjgyMi1iNGRhLTRiZGUtYjc1ZC03MGRkZGM1OTY4MTkiLCJpYXQiOjE2NzQ1NTM1MTQsImV4cCI6MTY3NDU1NTMxNH0.G10ZytH7UaY3lEm-sJTSdtH-_RKN0lxGgJGmr7PlFic",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"1\",\r\n    \"roleId\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/userRoles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userRoles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUserRole",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmNTFhNjgyMi1iNGRhLTRiZGUtYjc1ZC03MGRkZGM1OTY4MTkiLCJpYXQiOjE2NzQ1NTM1MTQsImV4cCI6MTY3NDU1NTMxNH0.G10ZytH7UaY3lEm-sJTSdtH-_RKN0lxGgJGmr7PlFic",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userRoles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userRoles"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "roleId",
+									"value": "user",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserRole",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmNTFhNjgyMi1iNGRhLTRiZGUtYjc1ZC03MGRkZGM1OTY4MTkiLCJpYXQiOjE2NzQ1NTM1MTQsImV4cCI6MTY3NDU1NTMxNH0.G10ZytH7UaY3lEm-sJTSdtH-_RKN0lxGgJGmr7PlFic",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"1\",\r\n    \"roleId\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/userRoles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userRoles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2QwMGIzMjRkMjcwYjc1YTUxMzliNGMiLCJpYXQiOjE2NzQ1Nzg4MjksImV4cCI6MTY3NDU4MDYyOX0.it-7N4QTbydEyyfQl4j3Q5geIwFzXgO-uFh6vqau8CI",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
