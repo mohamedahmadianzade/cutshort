@@ -1,4 +1,3 @@
-
 <div align="center">
 
   <h1>Cutshort Social App</h1>
@@ -10,7 +9,6 @@
 </div>
 
 <br />
-
 
 <!-- TechStack -->
 
@@ -37,11 +35,24 @@
 
 ### :dart: Features
 
+Security considerations:
+ - All service are protected via token authentication and there is no public api service. so please login to can access all service
+ - Authorization based on Role-based and each user has access to services via role permissions.
+ - Roles are note dymiac and in this version, there are just two fixed roles  ( admin and user )
+ - Role can be assigned/deassign to other users by user with admin role privileges
+ 
+
 - Todo
   - admin user can view/create/modify todos for all user
   - normal user can view/create/modify just his own todos
-- Feature 2
-- Feature 3
+- User
+  - admin user can view/create all users
+
+- Roles
+  - roles all fixed in this version (Admin/user)
+  - admin user can assign/deassign roles to all users
+- Posts
+- Comments
 
 <!-- Color Reference -->
 
