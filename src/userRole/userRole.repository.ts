@@ -3,7 +3,7 @@ import UserRoleModel from "./userRole.model";
 export default class UserRoleRepository {
   getAll = async (filter: IUserRole): Promise<IUserRole[]> => {
     const userRoles = await UserRoleModel.find(filter);
-    return userRoles;
+    return userRoles?.map((item) => this._format(item));
   };
 
   delete = async (filter: IUserRole) => {
@@ -18,4 +18,9 @@ export default class UserRoleRepository {
     const result = await userRoleModel.save();
     return result;
   };
+
+  _format = (userRole: IUserRole): IUserRole => ({
+    userId: userRole.userId,
+    roleId: userRole.roleId,
+  });
 }

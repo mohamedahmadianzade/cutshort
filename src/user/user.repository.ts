@@ -3,17 +3,13 @@ import IUser, {
   IUserInput,
   IGetAllUsersInput,
   IUserOutput,
+  IUserLoginOutput,
 } from "./user.interface";
 import UserModel from "./user.model";
-import { uuid } from "uuidv4";
 import moment from "moment";
 import UserRoleModel from "../userRole/userRole.model";
 import { Roles } from "../authentication/roles";
 export default class UserRepository {
-  /*
-    Admin user can see all users
-    normal user can see just his information
-  */
   getAllUsers = async (_filter: IGetAllUsersInput): Promise<IUserOutput[]> => {
     const filter: IGetAllUsersInput = {};
     if (_filter.username) filter.username = _filter.username;
@@ -28,37 +24,46 @@ export default class UserRepository {
     return users.map((user) => this._formatUser(user));
   };
 
-  getByUserId = async (userId: string): Promise<IUserOutput | null> => {
-    const user = await UserModel.findOne({ userId });
+  getByUserId = async (_id: string): Promise<IUserOutput | null> => {
+    const user = await UserModel.findOne({ _id });
     return user ? this._formatUser(user) : null;
+  };
+
+  login = async (username: string): Promise<IUserLoginOutput | null> => {
+    const user = await UserModel.findOne({ username }).select(
+      "_id username password"
+    );
+    return user
+      ? { userId: user._id, username: user.username, password: user.password }
+      : null;
   };
 
   getUser = async (filter: any): Promise<IUserOutput | null> => {
     const user = await UserModel.findOne(filter);
     return user ? this._formatUser(user) : null;
   };
-  _formatUser = (user: IUser) => {
-    return {
-      userId: user.userId,
-      fullname: user.fullname,
-      username: user.username,
-      createDate: moment(user.createDate).format("MMMM Do YYYY, h:mm:ss a"),
-    };
-  };
-
   createUser = async (user: IUserInput) => {
     const userModel = new UserModel();
-    userModel.userId = uuid();
     userModel.username = user.username;
     userModel.fullname = user.fullname;
     userModel.password = hash(user.password);
     const result = await userModel.save();
+
     // add default user role to each user
     const userRoleModel = new UserRoleModel({
-      userId: userModel.userId,
+      userId: userModel._id,
       roleId: Roles.user,
     });
     await userRoleModel.save();
     return this._formatUser(result);
+  };
+
+  _formatUser = (user: IUser): IUserOutput => {
+    return {
+      userId: user._id,
+      fullname: user.fullname,
+      username: user.username,
+      createDate: moment(user.createDate).format("MMMM Do YYYY, h:mm:ss a"),
+    };
   };
 }

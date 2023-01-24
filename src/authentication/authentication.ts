@@ -1,6 +1,6 @@
 import UserLogic from "../user/user.logic";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "../config";
+import { JWT_EXPIRE, JWT_SECRET_KEY } from "../config";
 import { IRequestUser } from "./authentication.middleware";
 import { Roles } from "./roles";
 
@@ -15,8 +15,8 @@ export default class Authentication {
   }): Promise<LoginResult> {
     if (!username) throw new Error("Please enter a username");
     if (!password) throw new Error("Please enter a password");
+
     const user = await userLogic.login(username, password);
-    if (!user) throw new Error("Username or password is incorrect");
 
     return {
       userId: user.userId,
@@ -26,7 +26,7 @@ export default class Authentication {
 
   generateToken(userId: string): string {
     return jwt.sign({ userId }, JWT_SECRET_KEY, {
-      expiresIn: "1800s",
+      expiresIn: JWT_EXPIRE,
     });
   }
 
@@ -47,7 +47,6 @@ interface LoginResult {
   userId: string;
   token: string;
 }
-
 
 export const accessDenied = () => {
   throw new Error("Access denied, you can just access/modify your information");

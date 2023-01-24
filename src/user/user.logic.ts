@@ -2,18 +2,15 @@ import { accessDenied } from "../authentication/authentication";
 import { IRequestUser } from "../authentication/authentication.middleware";
 import IPost from "../post/post.interface";
 import PostLogic from "../post/post.logic";
-import ITodo from "../todo/todo.interface";
+import  { ITodoOutput } from "../todo/todo.interface";
 import TodoLogic from "../todo/todo.logic";
 import { IUserInput, IGetAllUsersInput, IUserOutput } from "./user.interface";
+import bcrypt from "bcrypt";
 import UserRepository from "./user.repository";
 const userRepository = new UserRepository();
 
 export default class UserLogic {
-  getAllUsers = (
-    filter: IGetAllUsersInput,
-    requestUser: IRequestUser
-  ): Promise<IUserOutput[]> => {
-    if (!requestUser.isAdmin) filter.userId = requestUser.userId;
+  getAllUsers = (filter: IGetAllUsersInput): Promise<IUserOutput[]> => {
     return userRepository.getAllUsers(filter);
   };
 
@@ -23,13 +20,8 @@ export default class UserLogic {
     return userRepository.getByUserId(userId);
   };
 
-  createUser = async (
-    user: IUserInput,
-    requestUser: IRequestUser
-  ): Promise<IUserOutput> => {
+  createUser = async (user: IUserInput): Promise<IUserOutput> => {
     this._checkCreateUser(user);
-    if (!requestUser.isAdmin)
-      throw new Error("Just user with admin privileges can create users");
     const result = await userRepository.getByUserId(user.username);
     if (result)
       throw new Error(
@@ -39,7 +31,13 @@ export default class UserLogic {
   };
 
   login = async (username: string, password: string) => {
-    return userRepository.getUser({ username, password });
+    const message = "Username and password do not match";
+    const user = await userRepository.login(username);
+    if (!user) throw new Error(message);
+    const passVerify = bcrypt.compareSync(password, user.password);
+    console.log(passVerify);
+    if (!passVerify) throw new Error(message);
+    return user;
   };
 
   getUserPost = async (
@@ -59,12 +57,12 @@ export default class UserLogic {
   getUserTodos = async (
     userId: string,
     requestUser: IRequestUser
-  ): Promise<ITodo[]> => {
+  ): Promise<ITodoOutput[]> => {
     this._checkUserId(userId);
 
     if (!requestUser.isAdmin && requestUser.userId !== requestUser.userId)
       accessDenied();
-      
+
     const todoLogic = new TodoLogic();
     const userPosts = await todoLogic.getAll({ userId }, requestUser);
     return userPosts;

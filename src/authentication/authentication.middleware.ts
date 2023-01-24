@@ -28,6 +28,27 @@ export default async function AuthenticationMiddleware(
   next();
 }
 
+export async function AdminAccess(
+  req: any,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const authKey = req.headers.Authorization || req.headers.authorization;
+    if (!authKey)
+      throw new Error("Please provide token in header authorization key");
+    const token = authKey.split(" ")[1];
+    const { userId } = authentication.verifyToken(token);
+    const roles = await new UserRoleLogic().getAll({ userId });
+    const isAdmin = roles.find((role) => role.roleId === Roles.admin);
+    if (!isAdmin)
+      throw new Error("This service is available only for admin users");
+  } catch (error: any) {
+    return res.status(403).json(fail(error));
+  }
+  next();
+}
+
 export interface IRequestUser {
   userId: string;
   roles: (string | undefined)[];

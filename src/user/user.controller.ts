@@ -7,7 +7,7 @@ const userLogic = new UserLogic();
 export default class UserController {
   getAll = async (req: any, res: Response) => {
     try {
-      const users = await userLogic.getAllUsers(req.query, req.user);
+      const users = await userLogic.getAllUsers(req.query);
       res.json(success(users));
     } catch (error) {
       res.send(fail(error));
@@ -22,9 +22,17 @@ export default class UserController {
       res.send(fail(error));
     }
   };
+  me = async (req: any, res: Response) => {
+    try {
+      const users = await userLogic.getByUserId(req.user.userId, req.user);
+      res.json(success(users));
+    } catch (error) {
+      res.send(fail(error));
+    }
+  };
   create = async (req: any, res: Response) => {
     try {
-      const users = await userLogic.createUser(req.body,req.user);
+      const users = await userLogic.createUser(req.body);
       res.json(success(users));
     } catch (error) {
       res.send(fail(error));

@@ -9,6 +9,15 @@ export default interface ITodo {
   createDate: Date;
 }
 
+export interface ITodoOutput {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+  userId: string;
+  createdDate: string;
+}
+
 export interface ITodoFilter extends IPaginations {
   _id?: string;
   title?: string;

@@ -1,18 +1,20 @@
 import Router from "express";
-import AuthenticationMiddleware from "../authentication/authentication.middleware";
+import AuthenticationMiddleware, {
+  AdminAccess,
+} from "../authentication/authentication.middleware";
 import UserController from "./user.controller";
 
 const userRouter = Router();
 const userController = new UserController();
 
-// if admin has access to all user else just his information
-userRouter.get("/", AuthenticationMiddleware, userController.getAll);
+// Just admin user can do it
+userRouter.get("/", AdminAccess, userController.getAll);
+userRouter.post("/", AdminAccess, userController.create);
 
 // if admin has access to all user else just his information
 userRouter.get("/:userId", AuthenticationMiddleware, userController.get);
+userRouter.get("/me", AuthenticationMiddleware, userController.me);
 
-// just admin user canc create new user
-userRouter.post("/",AuthenticationMiddleware, userController.create);
 
 // if admin, has access to all user post else just his post
 userRouter.get(

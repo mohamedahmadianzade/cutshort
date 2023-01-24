@@ -1,5 +1,10 @@
 import UserRepository from "../user/user.repository";
-import ITodo, { ITodoFilter, ITodoCreate, ITodoUpdate } from "./todo.interface";
+import {
+  ITodoFilter,
+  ITodoCreate,
+  ITodoUpdate,
+  ITodoOutput,
+} from "./todo.interface";
 import TodoRepository from "./todo.repository";
 import { ObjectId } from "mongodb";
 import { IRequestUser } from "../authentication/authentication.middleware";
@@ -46,7 +51,7 @@ export default class TodoLogic {
     id: string,
     todo: ITodoUpdate,
     requestUser: IRequestUser
-  ): Promise<ITodo> {
+  ): Promise<ITodoOutput> {
     const _id = this._checkId(id);
 
     const currentTodo = await todoRepository.get({ _id });
@@ -61,15 +66,24 @@ export default class TodoLogic {
     return todoRepository.update(_id, todo);
   }
 
-  async create(todo: ITodoCreate, requestUser: IRequestUser): Promise<ITodo> {
+  async create(
+    todo: ITodoCreate,
+    requestUser: IRequestUser
+  ): Promise<ITodoOutput> {
     if (!todo.title) throw new Error("Please enter a title");
     if (!todo.description) throw new Error("Please enter a description");
-    if (!todo.userId) throw new Error("Please enter a userId");
 
-    if (!requestUser.isAdmin && todo.userId !== requestUser.userId)
+    // if there is no userId, so userId will be from the token userId
+    // if user is admin then can cerate todo for other users
+    // else normal user will face the error
+    if (!todo.userId) todo.userId = requestUser.userId;
+    else if (!requestUser.isAdmin && todo.userId != requestUser.userId)
       accessDenied();
 
+
     const userInfo = await new UserRepository().getByUserId(todo.userId);
+    console.log("===");
+    console.log(todo.userId);
     if (!userInfo) throw new Error("UserId is not valid");
 
     const { title, description } = todo;
