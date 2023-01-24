@@ -39,8 +39,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/users", UserRouter);
 app.use("/userRoles", AdminAccess, UserRoleRouter);
 app.use("/todos", AuthenticationMiddleware, todoRouter);
-app.use("/posts", postRouter);
-app.use("/comments", commentRouter);
+app.use("/posts", AuthenticationMiddleware, postRouter);
+app.use("/comments", AuthenticationMiddleware, commentRouter);
 app.use("/", authenticationRouter);
 
 export default app;

@@ -7,6 +7,13 @@ export default interface IPost {
   createDate: Date;
 }
 
+export interface IPostOutput {
+  id: string;
+  text: string;
+  userId: string;
+  createdDate: string;
+}
+
 export interface IPostFilter extends IPaginations {
   userId?: string;
   _id?: string;

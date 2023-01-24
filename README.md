@@ -3,7 +3,7 @@
   <h1>Cutshort Social App</h1>
   
   <p>
-    Simple social app
+    Repository Design Pattern - NodeJs - Typescript - RBACs implementation - MongoDB (Mongoos ORM)
   </p>
 
 </div>
@@ -33,7 +33,7 @@
 ### :dart: Security considerations:
  - All service are protected via token authentication and there is no public api service. so please login to can access all service
  - Authorization based on Role-based and each user has access to services via role permissions.
- - Roles are note dymiac and in this version, there are just two fixed roles  ( admin and user )
+ - Roles are not dynamic and in this version, there are just two fixed roles  ( admin and user )
  - Role can be assigned/deassign to other users by user with admin role privileges
 
 
@@ -42,17 +42,23 @@
 
 ### :dart: Features
 
-
-- Todo
-  - admin user can view/create/modify todos for all user
-  - normal user can view/create/modify just his own todos
 - User
   - admin user can view/create all users
 
 - Roles
   - roles all fixed in this version (Admin/user)
   - admin user can assign/deassign roles to all users
+
+- Todo
+  - if userID is in request, it will be filled by token userId
+  - admin user can view/create/modify todos for all user
+  - normal user can view/create/modify just his own todos
+  
 - Posts
+  - if userID is in request, it will be filled by token userId
+  - admin user can view/create/modify post for all user
+  - normal user can view/create/modify just his own post
+  
 - Comments
 
 <!-- Color Reference -->

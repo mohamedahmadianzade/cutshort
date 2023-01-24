@@ -4,6 +4,8 @@ import UserModel from "./user/user.model";
 import UserRoleModel from "./userRole/userRole.model";
 import { exit } from "process";
 import TodoModel from "./todo/todo.model";
+import PostModel from "./post/post.model";
+import CommentModel from "./comment/comment.model";
 // import bcrypt from "bcrypt";
 // import { SALT } from "./config";
 async function init() {
@@ -35,6 +37,38 @@ async function init() {
     createDate: new Date(),
   });
 
+  const postAdmin1 = await PostModel.create({
+    userId: adminUser._id,
+    text: " adminUser - text 1 ",
+    createDate: new Date(),
+  });
+  const postAdmin2 = await PostModel.create({
+    userId: adminUser._id,
+    text: " adminUser - text 2 ",
+    createDate: new Date(),
+  });
+
+  await CommentModel.create({
+    userId: adminUser._id,
+    postId: postAdmin1._id,
+    text: "post ( text 1) by admin for admin posts",
+    createDate: new Date(),
+  });
+
+  await CommentModel.create({
+    userId: adminUser._id,
+    postId: postAdmin1._id,
+    text: "post ( text 2) by admin for admin posts",
+    createDate: new Date(),
+  });
+
+  await CommentModel.create({
+    userId: adminUser._id,
+    postId: postAdmin2._id,
+    text: "post ( text 1) by admin for admin posts",
+    createDate: new Date(),
+  });
+
   console.log("admin user created username:admin password:admin");
 
   const user = await UserModel.create({
@@ -44,8 +78,6 @@ async function init() {
   });
 
   await UserRoleModel.create({ userId: user._id, roleId: "user" });
-
-
 
   await TodoModel.create({
     userId: user._id,
@@ -59,6 +91,37 @@ async function init() {
     title: " user - title 1 - false",
     description: " user - desc 1 - false",
     completed: false,
+    createDate: new Date(),
+  });
+
+  const userPost1 = await PostModel.create({
+    userId: user._id,
+    text: " user - text 1 ",
+    createDate: new Date(),
+  });
+  const userPost2 = await PostModel.create({
+    userId: user._id,
+    text: " user - text 2 ",
+    createDate: new Date(),
+  });
+
+  await CommentModel.create({
+    userId: adminUser._id,
+    postId: userPost1._id,
+    text: "post (text 1) by admin for user post",
+    createDate: new Date(),
+  });
+  await CommentModel.create({
+    userId: adminUser._id,
+    postId: userPost2._id,
+    text: "post (text 1) by admin for user post",
+    createDate: new Date(),
+  });
+
+  await CommentModel.create({
+    userId: user._id,
+    postId: userPost1._id,
+    text: "post (text 1) by admin for user post",
     createDate: new Date(),
   });
 

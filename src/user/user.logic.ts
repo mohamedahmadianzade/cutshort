@@ -1,8 +1,8 @@
 import { accessDenied } from "../authentication/authentication";
 import { IRequestUser } from "../authentication/authentication.middleware";
-import IPost from "../post/post.interface";
+import { IPostOutput } from "../post/post.interface";
 import PostLogic from "../post/post.logic";
-import  { ITodoOutput } from "../todo/todo.interface";
+import { ITodoOutput } from "../todo/todo.interface";
 import TodoLogic from "../todo/todo.logic";
 import { IUserInput, IGetAllUsersInput, IUserOutput } from "./user.interface";
 import bcrypt from "bcrypt";
@@ -43,14 +43,14 @@ export default class UserLogic {
   getUserPost = async (
     userId: string,
     requestUser: IRequestUser
-  ): Promise<IPost[]> => {
+  ): Promise<IPostOutput[]> => {
     this._checkUserId(userId);
 
     if (!requestUser.isAdmin && requestUser.userId !== requestUser.userId)
       accessDenied();
 
     const postLogic = new PostLogic();
-    const userPosts = await postLogic.getAll({ userId });
+    const userPosts = await postLogic.getAll({ userId }, requestUser);
     return userPosts;
   };
 
