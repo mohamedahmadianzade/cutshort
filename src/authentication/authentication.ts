@@ -34,10 +34,11 @@ export default class Authentication {
       throw new Error(
         `Username ${user.username} is exists, please choose different username`
       );
-    console.log("11");
     return userRepository.createUser(user);
   }
-
+  me = (userId: string) => {
+    return new UserRepository().getByUserId(userId);
+  };
   _checkCreateUser = (user: IUserInput) => {
     if (!user.username) throw new Error(`Please enter username`);
     if (!user.fullname) throw new Error(`Please enter fullname`);

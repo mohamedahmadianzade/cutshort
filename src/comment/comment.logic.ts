@@ -1,8 +1,9 @@
 import UserRepository from "../user/user.repository";
-import IComment, {
+import {
   ICommentFilter,
   ICommentCreate,
   ICommentUpdate,
+  ICommentOutput,
 } from "./comment.interface";
 import CommentRepository from "./comment.repository";
 import { ObjectId } from "mongodb";
@@ -42,7 +43,7 @@ export default class CommentLogic {
     id: string,
     comment: ICommentUpdate,
     requestUser: IRequestUser
-  ): Promise<IComment> {
+  ): Promise<ICommentOutput> {
     const _id = this._checkId(id, "CommentId");
     const currentComment = await commentRepository.get({ _id });
 
@@ -61,7 +62,7 @@ export default class CommentLogic {
   async create(
     comment: ICommentCreate,
     requestUser: IRequestUser
-  ): Promise<IComment> {
+  ): Promise<ICommentOutput> {
     if (!comment.text) throw new Error("Please enter a text");
     if (!comment.userId) throw new Error("Please enter a userId");
     if (!comment.postId) throw new Error("Please enter a postId");

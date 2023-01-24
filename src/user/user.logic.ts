@@ -54,8 +54,8 @@ export default class UserLogic {
       accessDenied();
 
     const todoLogic = new TodoLogic();
-    const userPosts = await todoLogic.getAll({ userId }, requestUser);
-    return userPosts;
+    const userTodos = await todoLogic.getAll({ userId });
+    return userTodos;
   };
 
   _checkUserId = (userId: string) => {

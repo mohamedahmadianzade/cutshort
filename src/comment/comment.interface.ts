@@ -7,6 +7,13 @@ export default interface IComment {
   postId: string;
   createDate: Date;
 }
+export interface ICommentOutput {
+  id: string;
+  text: string;
+  userId: string;
+  postId: string;
+  createdDate: string;
+}
 
 export interface ICommentFilter extends IPaginations {
   userId?: string;

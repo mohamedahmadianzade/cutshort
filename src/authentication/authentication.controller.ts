@@ -19,4 +19,12 @@ export default class AuthenticationController {
       res.send(fail(error));
     }
   };
+  me = async (req: any, res: Response) => {
+    try {
+      const users = await new Authentication().me(req.user.userId);
+      res.json(success(users));
+    } catch (error) {
+      res.send(fail(error));
+    }
+  };
 }

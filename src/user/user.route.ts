@@ -12,7 +12,6 @@ userRouter.get("/", AdminAccess, userController.getAll);
 
 // if admin has access to all user else just his information
 userRouter.get("/:userId", AuthenticationMiddleware, userController.get);
-userRouter.get("/me", AuthenticationMiddleware, userController.me);
 
 
 // if admin, has access to all user post else just his post

@@ -29,25 +29,29 @@
   </ul>
 </details>
 
-
 ### :dart: Security considerations:
- - All service are protected via token authentication and there is no public api service. so please login to can access all service
- - Authorization based on Role-based and each user has access to services via role permissions.
- - Roles are not dynamic and in this version, there are just two fixed roles  ( admin and user )
- - Role can be assigned/deassign to other users by user with admin role privileges
 
-
+- All service are protected via token authentication and there is no public api service. so please login to can access all service
+- Authorization based on Role-based and each user has access to services via role permissions.
+- Roles are not dynamic and in this version, there are just two fixed roles ( admin and user )
+- Role can be assigned/deassign to other users by user with admin role privileges
 
 <!-- Features -->
 
 ### :dart: Features
 
+-Public api
+
+- signIn
+- signUp
+- me      --> get current user information
+
 - User
+
   - admin user can view/create all users
-  - signup
-  - signIn
 
 - Roles
+
   - roles all fixed in this version (Admin/user)
   - admin user can assign/deassign roles to all users
 
@@ -55,12 +59,10 @@
   - if userID is in request, it will be filled by token userId
   - admin user can view/create/modify todos for all user
   - normal user can view/create/modify just his own todos
-  
 - Posts
   - if userID is in request, it will be filled by token userId
   - admin user can view/create/modify post for all user
   - normal user can view/create/modify just his own post
-  
 - Comments
 
 <!-- Color Reference -->
@@ -110,6 +112,7 @@ normal user ==> username: user password : user
 admin user has access completely to all api service and data but normal user just can access the api service and data that is related to him.
 
 By runnign this file, for each user, it will create
+
 - 2 posts
 
 - 2 comments

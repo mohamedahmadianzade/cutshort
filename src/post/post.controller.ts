@@ -47,7 +47,7 @@ export default class PostController {
   };
   postComments = async (req: any, res: Response) => {
     try {
-      const result = await postLogic.getPostComments(req.params?.id, req.user);
+      const result = await postLogic.getPostComments(req.params?.id);
       res.json(success(result));
     } catch (error) {
       res.json(fail(error));

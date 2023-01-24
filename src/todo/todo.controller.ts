@@ -7,7 +7,7 @@ const todoLogic = new TodoLogic();
 export default class TodoController {
   getAll = async (req: any, res: Response) => {
     try {
-      const result = await todoLogic.getAll(req.query, req.user);
+      const result = await todoLogic.getAll(req.query);
       res.json(success(result));
     } catch (error) {
       res.json(fail(error));
@@ -45,5 +45,5 @@ export default class TodoController {
     } catch (error) {
       res.json(fail(error));
     }
-  }
+  };
 }

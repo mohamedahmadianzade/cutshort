@@ -13,9 +13,7 @@ import { accessDenied } from "../authentication/authentication";
 const todoRepository = new TodoRepository();
 
 export default class TodoLogic {
-  async getAll(filter: ITodoFilter, requestUser: IRequestUser) {
-    // adding userId to filter makes result items filtered based userId
-    if (!requestUser.isAdmin) filter.userId = requestUser.userId;
+  async getAll(filter: ITodoFilter) {
     return todoRepository.getAll(filter);
   }
   async getById(id: string, requestUser: IRequestUser) {

@@ -22,14 +22,6 @@ export default class UserController {
       res.send(fail(error));
     }
   };
-  me = async (req: any, res: Response) => {
-    try {
-      const users = await userLogic.getByUserId(req.user.userId, req.user);
-      res.json(success(users));
-    } catch (error) {
-      res.send(fail(error));
-    }
-  };
   userPosts = async (req: any, res: Response) => {
     try {
       const users = await userLogic.getUserPost(req.params.userId, req.user);

@@ -8,7 +8,7 @@ import {
 import PostRepository from "./post.repository";
 import { ObjectId } from "mongodb";
 import CommentLogic from "../comment/comment.logic";
-import IComment from "../comment/comment.interface";
+import { ICommentOutput } from "../comment/comment.interface";
 import { IRequestUser } from "../authentication/authentication.middleware";
 import { accessDenied } from "../authentication/authentication";
 
@@ -31,11 +31,8 @@ export default class PostLogic {
 
   async getPostComments(
     postId: string,
-    requestUser: IRequestUser
-  ): Promise<IComment[]> {
+  ): Promise<ICommentOutput[]> {
     this._checkId(postId);
-    //check if user is valid to access the post and after tbat, it's comments
-    await this.getById(postId, requestUser);
     const result = await new CommentLogic().getAll({ postId });
     return result;
   }
