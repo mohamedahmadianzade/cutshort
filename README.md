@@ -30,7 +30,7 @@
 </details>
 
 
-### :Security considerations:
+### :dart: Security considerations:
  - All service are protected via token authentication and there is no public api service. so please login to can access all service
  - Authorization based on Role-based and each user has access to services via role permissions.
  - Roles are note dymiac and in this version, there are just two fixed roles  ( admin and user )
