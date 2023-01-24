@@ -29,7 +29,6 @@
   </ul>
 </details>
 
-<details>
 
 <!-- Features -->
 
@@ -40,7 +39,7 @@ Security considerations:
  - Authorization based on Role-based and each user has access to services via role permissions.
  - Roles are note dymiac and in this version, there are just two fixed roles  ( admin and user )
  - Role can be assigned/deassign to other users by user with admin role privileges
- 
+
 
 - Todo
   - admin user can view/create/modify todos for all user
