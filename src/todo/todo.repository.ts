@@ -64,4 +64,3 @@ export default class TodoRepository {
     createdDate: moment(todo.createDate).format("YYYY-MM-DD HH:mm:ss"),
   });
 }
-``;

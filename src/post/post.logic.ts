@@ -83,7 +83,7 @@ export default class PostLogic {
     // if user is admin then can cerate post for other users
     // else normal user will face the error
     if (!post.userId) post.userId = requestUser.userId;
-    else if (!requestUser.isAdmin && post.userId != requestUser.userId)
+    else if (!requestUser.isAdmin && post.userId !== requestUser.userId)
       accessDenied();
 
     const userInfo = await new UserRepository().getByUserId(post.userId);

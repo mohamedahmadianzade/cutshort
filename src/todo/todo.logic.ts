@@ -75,13 +75,11 @@ export default class TodoLogic {
     // if user is admin then can cerate todo for other users
     // else normal user will face the error
     if (!todo.userId) todo.userId = requestUser.userId;
-    else if (!requestUser.isAdmin && todo.userId != requestUser.userId)
+    else if (!requestUser.isAdmin && todo.userId !== requestUser.userId)
       accessDenied();
 
 
     const userInfo = await new UserRepository().getByUserId(todo.userId);
-    console.log("===");
-    console.log(todo.userId);
     if (!userInfo) throw new Error("UserId is not valid");
 
     const { title, description } = todo;

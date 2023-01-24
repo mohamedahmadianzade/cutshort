@@ -4,9 +4,10 @@
   "private": true,
   "author": "seyed mohamed ahmadian",
   "scripts": {
+    // "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "npx tsc",
     "start": "nodemon src/index.ts",
-    "test": "mocha -r ts-node/register  'src/test/*.ts' "
+    "test": "npm run build && mocha 'dist/test/**/*.js' --recursive  --timeout 60000 --exit"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

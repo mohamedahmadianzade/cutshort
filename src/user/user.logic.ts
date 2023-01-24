@@ -25,7 +25,6 @@ export default class UserLogic {
     const user = await userRepository.login(username);
     if (!user) throw new Error(message);
     const passVerify = bcrypt.compareSync(password, user.password);
-    console.log(passVerify);
     if (!passVerify) throw new Error(message);
     return user;
   };

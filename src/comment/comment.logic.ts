@@ -68,7 +68,7 @@ export default class CommentLogic {
     if (!comment.postId) throw new Error("Please enter a postId");
 
     // Just admin user can create comment instead of another user
-    if (!requestUser.isAdmin && comment.userId != requestUser.userId)
+    if (!requestUser.isAdmin && comment.userId !== requestUser.userId)
       accessDenied();
 
     const userInfo = await new UserRepository().getByUserId(comment.userId);

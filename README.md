@@ -134,7 +134,9 @@ By runnign this file, for each user, it will create
 To run tests, run the following command
 
 ```bash
-  yarn test test
+  npm run build
+  
+  npm run test
 ```
 
 <!-- Run Locally -->

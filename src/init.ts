@@ -1,3 +1,4 @@
+/* tslint:disable */
 require("dotenv").config();
 import Database from "./database";
 import UserModel from "./user/user.model";
@@ -122,7 +123,6 @@ async function init() {
     text: "post (text 1) by admin for user post",
     createDate: new Date(),
   });
-
 
   console.log("default user created username:user password:user");
   exit(1);

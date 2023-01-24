@@ -50,7 +50,7 @@ export default class Authentication {
   };
 
   generateToken(userId: string): string {
-    return jwt.sign({ userId }, JWT_SECRET_KEY, {
+    return "Bearer " + jwt.sign({ userId }, JWT_SECRET_KEY, {
       expiresIn: JWT_EXPIRE,
     });
   }

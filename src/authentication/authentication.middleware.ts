@@ -19,7 +19,7 @@ export default async function AuthenticationMiddleware(
     const user: IRequestUser = {
       userId,
       roles: roles.map((role) => role.roleId),
-      isAdmin: roles.find((role) => role.roleId === Roles.admin) != undefined,
+      isAdmin: roles.find((role) => role.roleId === Roles.admin) !== undefined,
     };
     req.user = user;
   } catch (error: any) {
