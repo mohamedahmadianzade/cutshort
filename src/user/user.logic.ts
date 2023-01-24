@@ -4,7 +4,7 @@ import { IPostOutput } from "../post/post.interface";
 import PostLogic from "../post/post.logic";
 import { ITodoOutput } from "../todo/todo.interface";
 import TodoLogic from "../todo/todo.logic";
-import { IUserInput, IGetAllUsersInput, IUserOutput } from "./user.interface";
+import { IGetAllUsersInput, IUserOutput } from "./user.interface";
 import bcrypt from "bcrypt";
 import UserRepository from "./user.repository";
 const userRepository = new UserRepository();
@@ -18,16 +18,6 @@ export default class UserLogic {
     this._checkUserId(userId);
     if (!requestUser.isAdmin && userId !== requestUser?.userId) accessDenied();
     return userRepository.getByUserId(userId);
-  };
-
-  createUser = async (user: IUserInput): Promise<IUserOutput> => {
-    this._checkCreateUser(user);
-    const result = await userRepository.getByUserId(user.username);
-    if (result)
-      throw new Error(
-        `Username ${user.username} is exists, please choose different username`
-      );
-    return userRepository.createUser(user);
   };
 
   login = async (username: string, password: string) => {
@@ -70,15 +60,5 @@ export default class UserLogic {
 
   _checkUserId = (userId: string) => {
     if (!userId) throw new Error(`Please enter valid userId`);
-  };
-
-  _checkCreateUser = (user: IUserInput) => {
-    if (!user.username) throw new Error(`Please enter username`);
-    if (!user.fullname) throw new Error(`Please enter fullname`);
-    if (!user.password) throw new Error(`Please enter password`);
-    if (user.fullname.length < 5)
-      throw new Error(`Minimum fullname must be at least 5 characters`);
-    if (user.password.length < 4)
-      throw new Error(`Minimum password must be at least 4 characters`);
   };
 }

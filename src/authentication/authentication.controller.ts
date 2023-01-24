@@ -3,9 +3,17 @@ import Authentication from "./authentication";
 import { success, fail } from "../general";
 
 export default class AuthenticationController {
-  login = async (req: Request, res: Response) => {
+  signin = async (req: Request, res: Response) => {
     try {
-      const users = await new Authentication().login(req.body);
+      const users = await new Authentication().signin(req.body);
+      res.json(success(users));
+    } catch (error) {
+      res.send(fail(error));
+    }
+  };
+  signup = async (req: Request, res: Response) => {
+    try {
+      const users = await new Authentication().signup(req.body);
       res.json(success(users));
     } catch (error) {
       res.send(fail(error));

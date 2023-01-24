@@ -4,6 +4,7 @@ import AuthenticationController from "./authentication.controller";
 const authenticationRouter = Router();
 const authenticationController = new AuthenticationController();
 
-authenticationRouter.post("/login", authenticationController.login);
+authenticationRouter.post("/signIn", authenticationController.signin);
+authenticationRouter.post("/signUp", authenticationController.signup);
 
 export default authenticationRouter;

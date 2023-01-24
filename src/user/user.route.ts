@@ -9,7 +9,6 @@ const userController = new UserController();
 
 // Just admin user can do it
 userRouter.get("/", AdminAccess, userController.getAll);
-userRouter.post("/", AdminAccess, userController.create);
 
 // if admin has access to all user else just his information
 userRouter.get("/:userId", AuthenticationMiddleware, userController.get);

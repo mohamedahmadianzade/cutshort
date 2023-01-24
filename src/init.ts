@@ -6,8 +6,6 @@ import { exit } from "process";
 import TodoModel from "./todo/todo.model";
 import PostModel from "./post/post.model";
 import CommentModel from "./comment/comment.model";
-// import bcrypt from "bcrypt";
-// import { SALT } from "./config";
 async function init() {
   await Database.initMongo();
   await UserModel.deleteMany({});

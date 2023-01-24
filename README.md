@@ -44,6 +44,8 @@
 
 - User
   - admin user can view/create all users
+  - signup
+  - signIn
 
 - Roles
   - roles all fixed in this version (Admin/user)
@@ -80,6 +82,7 @@ MONGODB_DATABASE
 QUERY_PAGESIZE
 
 JWT_SECRET_KEY
+
 JWT_EXPIRE
 
 SALT

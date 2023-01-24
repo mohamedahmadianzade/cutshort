@@ -63,7 +63,7 @@ export default class UserRepository {
       userId: user._id,
       fullname: user.fullname,
       username: user.username,
-      createDate: moment(user.createDate).format("MMMM Do YYYY, h:mm:ss a"),
+      createDate: moment(user.createDate).format("YYYY-MM-DD HH:mm:ss"),
     };
   };
 }

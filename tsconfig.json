@@ -10,6 +10,5 @@
     "noImplicitAny": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true
-  },
-  "include": ["custome.d.ts"]
+  }
 }
